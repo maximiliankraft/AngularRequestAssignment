@@ -1,27 +1,53 @@
-# AngularRequestAssignment
+# Angular Request Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+Folgendes ist zu implementieren: 
 
-## Development server
+Erzeuge mittels `http.get(...)` einen Request auf deine REST-API aus dem 4. Jahrgang. Die URL für *alle* Patienten sollte ungefähr so aussehen: `http://localhost:8080/api/patient`. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Speichere die JSON-Rohdaten in einem eigens angelegten Typ. Dieser könnte ungefähr so aussehen:
 
-## Code scaffolding
+```ts
+// https://hl7.org/fhir/patient.html 
+interface Patient{
+    name: string;
+    gender: string;
+    birthDate: Date;
+    ...
+}
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Wenn dann von `/api/patient` mehrere Patienten zurückgemeldet werden sollen diese in einem Patienten-Array (`Patient[]`) gespeichert werden.
 
-## Build
+Zeige eine Tabelle mit allen Patienteninfos in einer Übersicht an. Diese könnte so aussehen:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Geschlecht</td>
+        <td>Geburtsdatum</td>
+        <td>...</td>
+    </tr>
+        <tr>
+        <td>Max</td>
+        <td>Mustermann</td>
+        <td>1.1.2000</td>
+        <td>...</td>
+    </tr>
+    <tr>
+        <td>...</td>
+    </tr>
+</table>
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Abzugeben sind neben dem Quellcode auch Screenshots in denen ersichtlich ist 
+ - dass Patienten angezeigt werden
+ - dass das Spring-Backend im Hintergrund läuft
+ - dass Angular einen Request an Spring gesendet hat
+    - möglich über den Netzwerkanalyse Tab in Firefox
 
-## Running end-to-end tests
+![](img/networkAnalysis.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Anleitungen:
+ - Neues Angular Projekt anlegen: https://angular.io/tutorial/toh-pt0
+ - HTTPClient in Angular: https://angular.io/guide/http
