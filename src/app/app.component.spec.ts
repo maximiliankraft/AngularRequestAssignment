@@ -23,19 +23,21 @@ describe('AppComponent', () => {
   });
 
   it('should return all patients', function () {
-
     const patients: Patient[] = [
       {name: "Max Mustermann"}
     ];
 
-    const http = TestBed.inject(HttpClient);
-    spyOn(http,'get').and.returnValue(of(JSON.stringify(patients)));
     const fixture = TestBed.createComponent(AppComponent);
+    const http = TestBed.inject(HttpClient);
+    const app = fixture.componentInstance;
 
-    fixture.componentInstance.getAllPatients();
+    spyOn(http,'get').and.callThrough().and.returnValue(of(patients));
 
-    expect(http.get("http://localhost:8080/api/patients/")).toHaveBeenCalled();
+    app.getAllPatients();
 
+    if(app.patients.length === 0){
+      throw new Error("no patients were received");
+    }
   });
 
 });

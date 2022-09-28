@@ -16,6 +16,8 @@ export class AppComponent implements OnInit{
   title = 'EmptyProject';
   ipAddress: string = "";
 
+  // todo store patients here
+  public patients: Patient[] = [];
 
   constructor(private http: HttpClient) {}
 
