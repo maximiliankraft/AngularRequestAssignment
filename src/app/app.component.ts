@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
+// todo implement all your server-side properties of patient
+export interface Patient{
+  name: string;
+}
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,11 +35,14 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.fetchIpText();
     this.fetchIpJson();
-
   }
 
   // todo add http requests
   // https://angular.io/guide/http
+
+  getAllPatients(): void{
+    throw new Error("not implemented");
+  }
 
 }
 
