@@ -9,11 +9,15 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'EmptyProject';
+  title: string = 'EmptyProject';
   ipAddress: string = "";
 
   // todo store patients here
   public patients: Patient[] = [];
+
+  public currentPatient: Patient = {id: "", name: [   ]};
+
+
 
   constructor(private dataService: DataService) {}
 
@@ -49,5 +53,17 @@ export class AppComponent implements OnInit{
   getAllPatients(): void{
     throw new Error("not implemented");
   }
+
+  public strinigfyPatient(): string{
+    return JSON.stringify(this.currentPatient)
+  }
+
+  public currentPatientAddName(): void {
+
+    
+    
+    this.currentPatient.name.push({text: ""})
+  }
+
 }
 

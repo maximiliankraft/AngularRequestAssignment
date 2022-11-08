@@ -12,4 +12,23 @@
     </tr>
   </table>
 
+  <div>
+    <h1>Neuen Patient hinzufügen</h1>
+
+    <form>
+      <div *ngFor="let name of currentPatient.name" >
+
+        <input id="vorname" name="vorname" type="text" placeholder="Vorname" [(ngModel)]="name.text" />
+      </div>
+
+      <button (click)="currentPatientAddName()" >Name hinzufügen</button>
+
+    </form>
+
+    <div>
+      {{strinigfyPatient()}}
+    </div>
+
+  </div>
+
 </div>
