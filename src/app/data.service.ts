@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Patient } from './Patient';
 
 @Injectable({
@@ -20,4 +21,9 @@ export class DataService {
   getPatients() {
     return this.http.get<Patient[]>("http://localhost:8080/api/patient/", { responseType: "json" });
   }
+
+  savePatient(patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>("https://localhost/api/patient/", patient);
+  }
+
 }

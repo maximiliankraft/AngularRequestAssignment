@@ -59,10 +59,13 @@ export class AppComponent implements OnInit{
   }
 
   public currentPatientAddName(): void {
-
-    
-    
     this.currentPatient.name.push({text: ""})
+  }
+
+  public savePatient(): void {
+    this.dataService.savePatient(this.currentPatient).subscribe((value: Patient) => {
+      console.log(value);
+    });
   }
 
 }
