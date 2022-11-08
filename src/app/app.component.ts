@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
-// todo implement all your server-side properties of patient
-export interface Patient{
-  name: string;
-}
-
+import { Patient } from './Patient';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +15,17 @@ export class AppComponent implements OnInit{
   // todo store patients here
   public patients: Patient[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private dataService: DataService) {}
 
   fetchIpText(){
-    this.http.get("http://ifconfig.me",{responseType: "text"}).subscribe(response => {
+    this.dataService.getIfConfigMe().subscribe(response => {
       console.log(response);
       this.ipAddress = response;
     });
   }
 
   fetchIpJson(){
-    this.http.get("http://ifconfig.me/all.json",{responseType: "json"}).subscribe(response => {
+    this.dataService.getAllJson().subscribe(response => {
       console.log(response);
     });
   }
@@ -37,6 +33,14 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.fetchIpText();
     this.fetchIpJson();
+    this.fetchPatients();
+  }
+
+  fetchPatients() {
+    this.dataService.getPatients().subscribe(patients => {
+      console.log(patients);
+      this.patients = patients;
+    });
   }
 
   // todo add http requests
@@ -45,6 +49,5 @@ export class AppComponent implements OnInit{
   getAllPatients(): void{
     throw new Error("not implemented");
   }
-
 }
 

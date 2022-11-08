@@ -2,8 +2,14 @@
   {{ipAddress}}
 
   <table id="patientTable">
-    <!-- todo add your patients here -->
-
+    <tr *ngFor="let patient of patients">
+      <td>{{ patient.id }}</td>
+      <td>
+        <span *ngFor="let patientName of patient.name">
+          {{ patientName.text }}
+        </span>
+      </td>
+    </tr>
   </table>
 
 </div>
