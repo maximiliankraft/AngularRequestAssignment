@@ -23,6 +23,14 @@
       <option>unknown</option></select
     ><br />
     Birthdate: <input type="date" formControlName="birthDate" /><br />
+    <div formArrayName="telecom">
+      <div
+        *ngFor="let telecom of patientForm.controls.telecom.controls"
+        [formGroup]="telecom"
+      >
+        <b>Telecom:</b><br />
+      </div>
+    </div>
   </form>
 
   <pre>{{ patientForm.value | json }}</pre>

@@ -4,11 +4,14 @@ import { HumanName } from "./HumanName";
 
 export type Gender = 'unknown' | 'male' | 'female' | 'other';
 
+export interface Telecom {}
+
 export interface Patient {
   id: string;
   text?: string;
   active?: boolean;
   gender?: Gender;
   birthdate?: string;
+  telecom: Telecom[];
   name: HumanName[];
 }

@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
     active: new FormControl(true),
     gender: new FormControl<Gender>('unknown'),
     birthDate: new FormControl(''),
+    telecom: new FormArray([]),
   });
 
 
