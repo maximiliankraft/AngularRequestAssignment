@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
     text: new FormControl(''),
     active: new FormControl(true),
     gender: new FormControl<Gender>('unknown'),
+    birthDate: new FormControl(''),
   });
 
 

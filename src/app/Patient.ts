@@ -9,5 +9,6 @@ export interface Patient {
   text?: string;
   active?: boolean;
   gender?: Gender;
+  birthdate?: string;
   name: HumanName[];
 }
