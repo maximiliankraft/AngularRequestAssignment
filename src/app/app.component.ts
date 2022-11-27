@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { Patient } from './Patient';
+import { Gender, Patient } from './Patient';
 import { DataService } from './data.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   patientForm = new FormGroup({
     text: new FormControl(''),
     active: new FormControl(true),
+    gender: new FormControl<Gender>('unknown'),
   });
 
 
