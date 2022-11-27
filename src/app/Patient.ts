@@ -13,4 +13,5 @@ export interface Patient {
   birthdate?: string;
   telecom: Telecom[];
   name: HumanName[];
+  deceasedBoolean?: boolean;
 }

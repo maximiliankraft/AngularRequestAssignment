@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
     gender: new FormControl<Gender>('unknown'),
     birthDate: new FormControl(''),
     telecom: new FormArray([this.createTelecomFormGroup()]),
+    deceasedBoolean: new FormControl(false),
   });
 
   private createTelecomFormGroup(): FormGroup<{
