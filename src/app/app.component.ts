@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
 
   createAddressFormGroup() {
     return new FormGroup({
+      city: new FormControl(''),
       postalcode: new FormControl(''),
     });
   }
