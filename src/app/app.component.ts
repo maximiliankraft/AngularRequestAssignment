@@ -14,10 +14,16 @@ export class AppComponent implements OnInit{
 
   // todo store patients here
   public patients: Patient[] = [];
+  currentPatient?: Patient = undefined;
+
 
   constructor(private dataService: DataService) {}
 
-  fetchIpText(){
+  selectPatient(selection: Patient) {
+    this.currentPatient = selection;
+  }
+
+  fetchIpText() {
     this.dataService.getIfConfigMe().subscribe(response => {
       console.log(response);
       this.ipAddress = response;
