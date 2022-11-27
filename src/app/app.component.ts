@@ -19,6 +19,7 @@ export class AppComponent implements OnInit{
 
   patientForm = new FormGroup({
     text: new FormControl(''),
+    active: new FormControl(true),
   });
 
 

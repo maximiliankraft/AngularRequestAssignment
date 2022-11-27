@@ -14,6 +14,7 @@
 
   <form [formGroup]="patientForm">
     Text: <input formControlName="text" /><br />
+    Active: <input type="checkbox" formControlName="active" /><br />
   </form>
 
   <pre>{{ patientForm.value | json }}</pre>
