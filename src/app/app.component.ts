@@ -24,6 +24,7 @@ export class AppComponent implements OnInit{
     birthDate: new FormControl(''),
     telecom: new FormArray([this.createTelecomFormGroup()]),
     deceasedBoolean: new FormControl(false),
+    deceasedDateTime: new FormControl(null as Date | null),
   });
 
   private createTelecomFormGroup(): FormGroup<{

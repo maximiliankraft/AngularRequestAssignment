@@ -34,6 +34,8 @@
       <button (click)="addNewTelecom()">Add another</button>
     </div>
     Deceased: <input type="checkbox" formControlName="deceasedBoolean" /><br />
+    Deceased Time:
+    <input type="datetime-local" formControlName="deceasedDateTime" /><br />
   </form>
 
   <pre>{{ patientForm.value | json }}</pre>
