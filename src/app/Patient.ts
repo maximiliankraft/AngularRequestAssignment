@@ -4,5 +4,6 @@ import { HumanName } from "./HumanName";
 
 export interface Patient {
   id: string;
+  text?: string;
   name: HumanName[];
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { Patient } from './Patient';
 import { DataService } from './data.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit{
   // todo store patients here
   public patients: Patient[] = [];
   currentPatient?: Patient = undefined;
+
+  patientForm = new FormGroup({
+    text: new FormControl(''),
+  });
 
 
   constructor(private dataService: DataService) {}

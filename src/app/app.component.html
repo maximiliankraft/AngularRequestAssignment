@@ -12,6 +12,11 @@
     </tr>
   </table>
 
+  <form [formGroup]="patientForm">
+    Text: <input formControlName="text" /><br />
+  </form>
+
+  <pre>{{ patientForm.value | json }}</pre>
 
   <pre
     >{{ currentPatient | json }}
