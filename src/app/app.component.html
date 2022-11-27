@@ -36,6 +36,15 @@
     Deceased: <input type="checkbox" formControlName="deceasedBoolean" /><br />
     Deceased Time:
     <input type="datetime-local" formControlName="deceasedDateTime" /><br />
+    Address:
+    <div
+      style="border: solid"
+      *ngFor="
+        let address of patientForm.controls.address.controls;
+      "
+      [formGroup]="address"
+    >
+    </div>
   </form>
 
   <pre>{{ patientForm.value | json }}</pre>

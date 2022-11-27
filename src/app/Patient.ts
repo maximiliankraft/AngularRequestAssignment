@@ -5,6 +5,8 @@ import { Telecom } from './Telecom';
 
 export type Gender = 'unknown' | 'male' | 'female' | 'other';
 
+export interface Address {}
+
 export interface Patient {
   id: string;
   text?: string;
@@ -15,4 +17,5 @@ export interface Patient {
   name: HumanName[];
   deceasedBoolean?: boolean;
   deceasedDateTime?: Date;
+  address: Address[];
 }
