@@ -25,8 +25,14 @@ export class AppComponent implements OnInit{
     telecom: new FormArray([this.createTelecomFormGroup()]),
     deceasedBoolean: new FormControl(false),
     deceasedDateTime: new FormControl(null as Date | null),
-    address: new FormArray([]),
+    address: new FormArray([this.createAddressFormGroup()]),
   });
+
+  createAddressFormGroup() {
+    return new FormGroup({
+      postalcode: new FormControl(''),
+    });
+  }
 
   private createTelecomFormGroup(): FormGroup<{
     value: FormControl<string | null>;
