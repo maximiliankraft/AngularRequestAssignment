@@ -42,10 +42,12 @@
       style="border: solid"
       *ngFor="
         let address of patientForm.controls.address.controls;
+        let adressIndex = index
       "
       [formGroup]="address"
     >
       Postal Code: <input formControlName="postalcode" /><br />
+      <button (click)="removeAddress(adressIndex)">Delete</button>
     </div>
   </form>
 

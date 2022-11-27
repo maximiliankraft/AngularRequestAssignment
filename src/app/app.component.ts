@@ -38,6 +38,10 @@ export class AppComponent implements OnInit{
     this.patientForm.controls.address.push(this.createAddressFormGroup());
   }
 
+  removeAddress(index: number) {
+    this.patientForm.controls.address.removeAt(index);
+  }
+
   private createTelecomFormGroup(): FormGroup<{
     value: FormControl<string | null>;
   }> {
