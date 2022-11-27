@@ -22,8 +22,16 @@ export class AppComponent implements OnInit{
     active: new FormControl(true),
     gender: new FormControl<Gender>('unknown'),
     birthDate: new FormControl(''),
-    telecom: new FormArray([]),
+    telecom: new FormArray([this.createTelecomFormGroup()]),
   });
+
+  private createTelecomFormGroup(): FormGroup<{
+    value: FormControl<string | null>;
+  }> {
+    return new FormGroup({
+      value: new FormControl(''),
+    });
+  }
 
 
   constructor(private dataService: DataService) {}

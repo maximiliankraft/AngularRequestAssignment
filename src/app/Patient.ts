@@ -1,10 +1,9 @@
-import { HumanName } from "./HumanName";
+import { HumanName } from './HumanName';
+import { Telecom } from './Telecom';
 
 // todo implement all your server-side properties of patient
 
 export type Gender = 'unknown' | 'male' | 'female' | 'other';
-
-export interface Telecom {}
 
 export interface Patient {
   id: string;
