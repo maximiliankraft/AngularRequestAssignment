@@ -33,6 +33,9 @@ export class AppComponent implements OnInit{
     });
   }
 
+  addNewTelecom() {
+    this.patientForm.controls.telecom.push(this.createTelecomFormGroup());
+  }
 
   constructor(private dataService: DataService) {}
 
