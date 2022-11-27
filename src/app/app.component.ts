@@ -34,6 +34,10 @@ export class AppComponent implements OnInit{
     });
   }
 
+  addNewAddress() {
+    this.patientForm.controls.address.push(this.createAddressFormGroup());
+  }
+
   private createTelecomFormGroup(): FormGroup<{
     value: FormControl<string | null>;
   }> {
