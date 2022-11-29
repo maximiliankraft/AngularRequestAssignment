@@ -8,7 +8,6 @@ export type Gender = 'unknown' | 'male' | 'female' | 'other';
 
 export interface Patient {
   id: string;
-  text?: string;
   active?: boolean;
   gender?: Gender;
   birthdate?: string;

@@ -18,7 +18,6 @@ export class AppComponent implements OnInit{
   currentPatient?: Patient = undefined;
 
   patientForm = new FormGroup({
-    text: new FormControl(''),
     active: new FormControl(true),
     gender: new FormControl<Gender>('unknown'),
     birthDate: new FormControl(''),
