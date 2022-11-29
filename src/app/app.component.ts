@@ -60,6 +60,11 @@ export class AppComponent implements OnInit{
     this.currentPatient = selection;
   }
 
+  createNewPatient() {
+    this.currentPatient = {};
+    this.patientForm.reset();
+  }
+
   fetchIpText() {
     this.dataService.getIfConfigMe().subscribe(response => {
       console.log(response);

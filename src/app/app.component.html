@@ -12,6 +12,8 @@
     </tr>
   </table>
 
+  <button (click)="createNewPatient()">Create new Patient</button><br />
+
   <form *ngIf="currentPatient" [formGroup]="patientForm">
     Active: <input type="checkbox" formControlName="active" /><br />
     Gender:
