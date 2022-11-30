@@ -1,5 +1,5 @@
 <div>
-  {{ipAddress}}
+  
 
   <table id="patientTable">
     <tr *ngFor="let patient of patients" (click)="selectPatient(patient)">
@@ -12,7 +12,7 @@
     </tr>
   </table>
 
-  <button (click)="createNewPatient()">Create new Patient</button><br />
+  <button mat-button (click)="createNewPatient()">Create new Patient</button><br />
 
   <form *ngIf="currentPatient" [formGroup]="patientForm">
     Active: <input type="checkbox" formControlName="active" /><br />
@@ -26,19 +26,21 @@
     Birthdate: <input type="date" formControlName="birthDate" /><br />
     <div formArrayName="telecom">
       <div
-        *ngFor="let telecom of patientForm.controls.telecom.controls"
+        *ngFor="let telecom of patientForm.controls.telecom.controls; 
+        let telecomIndex = index"
         [formGroup]="telecom"
       >
         <b>Telecom:</b><br />
-        Value: <input formControlName="value" />
+        Value: <input matInput type="text" formControlName="value" />
+        <button (click)="deleteLastTelecom(telecomIndex)">Delete</button>
       </div>
-      <button (click)="addNewTelecom()">Add another</button>
+      <button mat-button (click)="addNewTelecom()">Add another</button>
     </div>
     Deceased: <input type="checkbox" formControlName="deceasedBoolean" /><br />
     Deceased Time:
     <input type="datetime-local" formControlName="deceasedDateTime" /><br />
     Address:
-    <button (click)="addNewAddress()">New Address</button>
+    <button mat-button (click)="addNewAddress()">New Address</button>
     <div
       style="border: solid"
       *ngFor="
@@ -49,15 +51,11 @@
     >
       Postal Code: <input formControlName="postalcode" /><br />
       City: <input formControlName="city" /><br />
-      <button (click)="removeAddress(adressIndex)">Delete</button>
+      <button mat-button (click)="removeAddress(adressIndex)">Delete</button>
     </div>
-    <button (click)="savePatient()">Save</button>
-    <!-- wenn der patient eine id hat, kommt er aus der db u kann daher gelöscht werden
-         sonst zeigen wir den button gar nicht an -->
-    <button *ngIf="currentPatient?.id" (click)="deletePatient()">
-      Delete Patient
-    </button>
   </form>
+
+  <button (click)="sendPatientData()" >Daten absenden</button>
 
   <pre>{{ patientForm.value | json }}</pre>
 

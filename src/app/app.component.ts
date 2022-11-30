@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import { Gender, Patient } from './Patient';
 import { DataService } from './data.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatButton, MatSlideToggle, MatInput } from '@angular/material/';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,11 @@ export class AppComponent implements OnInit{
   public patients: Patient[] = [];
   currentPatient?: Patient = undefined;
 
-  patientForm = new FormGroup({
-    active: new FormControl(true),
-    gender: new FormControl<Gender>('unknown'),
-    birthDate: new FormControl(''),
-    telecom: new FormArray([this.createTelecomFormGroup()]),
+  patientForm = new FormGroup({ // pateint-objekt
+    active: new FormControl(true), // checkbox
+    gender: new FormControl<Gender>('unknown'), // select
+    birthDate: new FormControl(new Date()), // text
+    telecom: new FormArray([ this.createTelecomFormGroup() ]), // listen von einträren
     deceasedBoolean: new FormControl(false),
     deceasedDateTime: new FormControl(null as Date | null),
     address: new FormArray([this.createAddressFormGroup()]),
@@ -52,6 +53,10 @@ export class AppComponent implements OnInit{
 
   addNewTelecom() {
     this.patientForm.controls.telecom.push(this.createTelecomFormGroup());
+  }
+
+  deleteLastTelecom(index: number){
+    this.patientForm.controls.telecom.removeAt(index);
   }
 
   constructor(private dataService: DataService) {}
@@ -92,12 +97,19 @@ export class AppComponent implements OnInit{
       });
     } else {
       this.dataService
-        .postPatient(this.patientForm.value)
+        .postPatient(this.patientForm.value as any)
         .subscribe(response => {
           console.log('post', response);
           this.fetchPatients();
           this.currentPatient = undefined;
         });
+    }
+  }
+
+  sendPatientData(){
+    if (this.currentPatient !== undefined) {
+      
+      this.dataService.postPatient(this.currentPatient);
     }
   }
 
