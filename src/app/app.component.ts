@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import { Gender, Patient } from './Patient';
 import { DataService } from './data.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatButton, MatSlideToggle, MatInput } from '@angular/material/';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,11 @@ export class AppComponent implements OnInit{
   public patients: Patient[] = [];
   currentPatient?: Patient = undefined;
 
-  patientForm = new FormGroup({
-    text: new FormControl(''),
-    active: new FormControl(true),
-    gender: new FormControl<Gender>('unknown'),
-    birthDate: new FormControl(''),
-    telecom: new FormArray([this.createTelecomFormGroup()]),
+  patientForm = new FormGroup({ // pateint-objekt
+    active: new FormControl(true), // checkbox
+    gender: new FormControl<Gender>('unknown'), // select
+    birthDate: new FormControl(new Date()), // text
+    telecom: new FormArray([ this.createTelecomFormGroup() ]), // listen von einträren
     deceasedBoolean: new FormControl(false),
     deceasedDateTime: new FormControl(null as Date | null),
     address: new FormArray([this.createAddressFormGroup()]),
@@ -55,10 +55,70 @@ export class AppComponent implements OnInit{
     this.patientForm.controls.telecom.push(this.createTelecomFormGroup());
   }
 
+  deleteLastTelecom(index: number){
+    this.patientForm.controls.telecom.removeAt(index);
+  }
+
   constructor(private dataService: DataService) {}
 
   selectPatient(selection: Patient) {
     this.currentPatient = selection;
+    this.patientForm.reset();
+    this.patientForm.controls.telecom.clear();
+    while (
+      this.patientForm.controls.telecom.length <
+      (this.currentPatient?.telecom?.length ?? 0)
+    ) {
+      this.addNewTelecom();
+    }
+    this.patientForm.controls.address.clear();
+    while (
+      this.patientForm.controls.address.length <
+      (this.currentPatient?.address?.length ?? 0)
+    ) {
+      this.addNewAddress();
+    }
+    this.patientForm.patchValue(this.currentPatient);
+  }
+
+  createNewPatient() {
+    this.currentPatient = {};
+    this.patientForm.reset();
+  }
+
+  savePatient() {
+    if (this.currentPatient?.id) {
+      const merged: any = this.patientForm.value;
+      merged.id = this.currentPatient.id;
+      this.dataService.putPatient(merged).subscribe(response => {
+        console.log('put', response);
+        this.fetchPatients();
+        this.currentPatient = undefined;
+      });
+    } else {
+      this.dataService
+        .postPatient(this.patientForm.value as any)
+        .subscribe(response => {
+          console.log('post', response);
+          this.fetchPatients();
+          this.currentPatient = undefined;
+        });
+    }
+  }
+
+  sendPatientData(){
+    if (this.currentPatient !== undefined) {
+      
+      this.dataService.postPatient(this.currentPatient);
+    }
+  }
+
+  deletePatient() {
+    this.dataService.deletePatient(this.currentPatient).subscribe(response => {
+      console.log('Patient deleted', response);
+      this.fetchPatients();
+      this.currentPatient = undefined;
+    });
   }
 
   fetchIpText() {
